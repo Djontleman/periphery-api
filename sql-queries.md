@@ -1,4 +1,5 @@
 # SQL Queries
+roomsql doesn't like some of my queries :(
 
 ## Database Setup
 Database Name: peripheryapi
@@ -6,14 +7,14 @@ Database Name: peripheryapi
 ## Table Setup
 
 Album Type Enum:
-```roomsql
+```
 CREATE TYPE album_type AS ENUM (
     'LP', 'EP', 'Single', 'Live', 'Comp'
 );
 ```
 
 Albums Table:
-```roomsql
+```
 CREATE TABLE albums (
     id SERIAL PRIMARY KEY,
     album_name TEXT NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE albums (
 ```
 
 Labels Table:
-```roomsql
+```
 CREATE TABLE labels (
     id SERIAL PRIMARY KEY,
     label_name TEXT NOT NULL
@@ -32,7 +33,7 @@ CREATE TABLE labels (
 ```
 
 Albums-to-Labels Table:
-```roomsql
+```
 CREATE TABLE albums_labels (
     id SERIAL PRIMARY KEY,
     album_id INT NOT NULL REFERENCES albums(id),
@@ -41,14 +42,14 @@ CREATE TABLE albums_labels (
 ```
 
 Guitar Type Enum:
-```roomsql
+```
 CREATE TYPE guitar_type AS ENUM (
     '6-String', '7-String', '8-String'
 );
 ```
 
 Tunings Table:
-```roomsql
+```
 CREATE TABLE tunings (
     id SERIAL PRIMARY KEY,
     tuning_name TEXT,
@@ -58,7 +59,7 @@ CREATE TABLE tunings (
 ```
 
 Songs Table:
-```roomsql
+```
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,
     song_name TEXT NOT NULL,
@@ -72,9 +73,23 @@ CREATE TABLE songs (
 ## Table Data
 
 Album Data:
-```roomsql
-INSERT INTO albums 
-    (album_name, album_type, release_date, album_duration, label)
-    VALUES
-    ('Periphery', 'LP', '2010-04-20', '01-12-52', )
+```
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Periphery', 'LP', '2010-04-20', '01:12:52');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Periphery (Special Edition)', 'LP', '2012-02-06', NULL);
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Periphery II: This Time It''s Personal', 'LP', '2012-07-03', '01:09:00');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Juggernaut: Alpha', 'LP', '2015-01-27', '00:41:25');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Juggernaut: Omega', 'LP', '2015-01-27', '00:39:21');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Periphery III: Select Difficulty', 'LP', '2016-07-22', '01:04:06');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Periphery IV: Hail Stan', 'LP', '2019-04-05', '01:03:59');
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Icarus EP', 'EP', '2011-04-19', NULL);
+INSERT INTO albums (album_name, album_type, release_date, album_duration) 
+    VALUES ('Clear', 'EP', '2014-01-28', '00:29:12');
 ```
