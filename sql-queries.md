@@ -7,14 +7,14 @@ Database Name: peripheryapi
 ## Table Setup
 
 Album Type Enum:
-```
+```roomsql
 CREATE TYPE album_type AS ENUM (
     'LP', 'EP', 'Single', 'Live', 'Comp'
 );
 ```
 
 Albums Table:
-```
+```roomsql
 CREATE TABLE albums (
     id SERIAL PRIMARY KEY,
     album_name TEXT NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE albums (
 ```
 
 Labels Table:
-```
+```roomsql
 CREATE TABLE labels (
     id SERIAL PRIMARY KEY,
     label_name TEXT NOT NULL
@@ -33,7 +33,7 @@ CREATE TABLE labels (
 ```
 
 Albums-to-Labels Table:
-```
+```roomsql
 CREATE TABLE albums_labels (
     id SERIAL PRIMARY KEY,
     album_id INT NOT NULL REFERENCES albums(id),
@@ -42,14 +42,14 @@ CREATE TABLE albums_labels (
 ```
 
 Guitar Type Enum:
-```
+```roomsql
 CREATE TYPE guitar_type AS ENUM (
     '6-String', '7-String', '8-String'
 );
 ```
 
 Tunings Table:
-```
+```roomsql
 CREATE TABLE tunings (
     id SERIAL PRIMARY KEY,
     tuning_name TEXT,
@@ -59,7 +59,7 @@ CREATE TABLE tunings (
 ```
 
 Songs Table:
-```
+```roomsql
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,
     song_name TEXT NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE songs (
 ## Table Data
 
 Album Data:
-```
+```roomsql
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Periphery', 'LP', '2010-04-20', '01:12:52');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
@@ -93,3 +93,18 @@ INSERT INTO albums (album_name, album_type, release_date, album_duration)
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Clear', 'EP', '2014-01-28', '00:29:12');
 ```
+
+
+## Queries
+
+Get All Albums:
+```roomsql
+SELECT * FROM albums;
+```
+
+Get Album By Id:
+```roomsql
+SELECT * FROM albums 
+WHERE id = ?;
+```
+

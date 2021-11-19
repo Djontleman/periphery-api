@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlbumService {
@@ -18,5 +19,9 @@ public class AlbumService {
 
     public List<Album> getAllAlbums() {
         return albumDAO.getAllAlbums();
+    }
+
+    public Optional<Album> getAlbumById(int id) {
+        return albumDAO.getAlbumById(id);
     }
 }
