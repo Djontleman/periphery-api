@@ -20,7 +20,7 @@ CREATE TABLE albums (
     album_name TEXT NOT NULL,
     album_type album_type NOT NULL,
     release_date DATE NOT NULL,
-    album_duration TIME
+    album_duration TIME NOT NULL
 );
 ```
 
@@ -63,7 +63,7 @@ Songs Table:
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,
     song_name TEXT NOT NULL,
-    song_duration TIME,
+    song_duration TIME NOT NULL,
     album_id INT NOT NULL REFERENCES albums(id),
     has_music_video BOOL NOT NULL,
     tuning_id INT REFERENCES tunings(id)
@@ -77,7 +77,7 @@ Album Data:
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Periphery', 'LP', '2010-04-20', '01:12:52');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
-    VALUES ('Periphery (Special Edition)', 'LP', '2012-02-06', NULL);
+    VALUES ('Periphery (Special Edition)', 'LP', '2012-02-06', '0:00:00');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Periphery II: This Time It''s Personal', 'LP', '2012-07-03', '01:09:00');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
@@ -89,7 +89,7 @@ INSERT INTO albums (album_name, album_type, release_date, album_duration)
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Periphery IV: Hail Stan', 'LP', '2019-04-05', '01:03:59');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
-    VALUES ('Icarus EP', 'EP', '2011-04-19', NULL);
+    VALUES ('Icarus EP', 'EP', '2011-04-19', '0:00:00');
 INSERT INTO albums (album_name, album_type, release_date, album_duration) 
     VALUES ('Clear', 'EP', '2014-01-28', '00:29:12');
 ```
