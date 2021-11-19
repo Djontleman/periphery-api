@@ -19,8 +19,24 @@ CREATE TABLE albums (
     album_name TEXT NOT NULL,
     album_type album_type NOT NULL,
     release_date DATE NOT NULL,
-    album_duration TIME,
-    label TEXT
+    album_duration TIME
+);
+```
+
+Labels Table:
+```roomsql
+CREATE TABLE labels (
+    id SERIAL PRIMARY KEY,
+    label_name TEXT NOT NULL
+);
+```
+
+Albums-to-Labels Table:
+```roomsql
+CREATE TABLE albums_labels (
+    id SERIAL PRIMARY KEY,
+    album_id INT NOT NULL REFERENCES albums(id),
+    label_id INT NOT NULL REFERENCES labels(id)
 );
 ```
 
@@ -54,3 +70,11 @@ CREATE TABLE songs (
 ```
 
 ## Table Data
+
+Album Data:
+```roomsql
+INSERT INTO albums 
+    (album_name, album_type, release_date, album_duration, label)
+    VALUES
+    ('Periphery', 'LP', '2010-04-20', '01-12-52', )
+```
