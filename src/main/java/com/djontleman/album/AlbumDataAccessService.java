@@ -15,13 +15,26 @@ public class AlbumDataAccessService implements AlbumDAO{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    AlbumRowMapper albumRowMapper = new AlbumRowMapper();
+
     @Override
     public List<Album> getAllAlbums() {
         String sql = """
                 SELECT *
                 FROM albums;
                 """;
-        List<Album> albums = jdbcTemplate.query(sql, new AlbumRowMapper());
+        List<Album> albums = jdbcTemplate.query(sql, albumRowMapper);
+        return albums;
+    }
+
+    @Override
+    public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType) {
+        String sql = """
+                SELECT *
+                FROM albums
+                WHERE album_name = 'Clear';
+                """;
+        List<Album> albums = jdbcTemplate.query(sql, albumRowMapper);
         return albums;
     }
 
@@ -32,7 +45,7 @@ public class AlbumDataAccessService implements AlbumDAO{
                 FROM albums
                 WHERE id = ?;
                 """;
-        Optional<Album> album = jdbcTemplate.query(sql, new AlbumRowMapper(), id)
+        Optional<Album> album = jdbcTemplate.query(sql, albumRowMapper, id)
                 .stream()
                 .findFirst();
         return album;
