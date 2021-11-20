@@ -101,7 +101,7 @@ Get All Albums:
 ```roomsql
 SELECT * FROM albums;
 ```
-
+### Currently out-of-order
 Get All Albums where Album Type:
 ```roomsql
 SELECT * FROM albums

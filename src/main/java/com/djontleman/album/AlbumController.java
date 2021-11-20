@@ -18,9 +18,14 @@ public class AlbumController {
     }
 
     @GetMapping
-    public List<Album> getAllAlbums(@RequestParam(required = false) String type) {
-        return albumService.getAllAlbums(type);
+    public List<Album> getAllAlbums() {
+        return albumService.getAllAlbums();
     }
+
+//    @GetMapping
+//    public List<Album> getAllAlbums(@RequestParam(required = false) String type) {
+//        return albumService.getAllAlbums(type);
+//    }
 
     @GetMapping("{id}")
     public Optional<Album> getAlbumById(@PathVariable int id) {
