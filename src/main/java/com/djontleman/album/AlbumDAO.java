@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public interface AlbumDAO {
     public List<Album> getAllAlbums();
-//    public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType);
+    public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType);
     public Optional<Album> getAlbumById(int id);
 }

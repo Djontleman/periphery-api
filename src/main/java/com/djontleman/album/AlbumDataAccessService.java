@@ -1,5 +1,6 @@
 package com.djontleman.album;
 
+import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -27,16 +28,17 @@ public class AlbumDataAccessService implements AlbumDAO{
         return albums;
     }
 
-//    @Override
-//    public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType) {
-//        String sql = """
-//                SELECT *
-//                FROM albums
-//                WHERE album_name = 'Clear';
-//                """;
-//        List<Album> albums = jdbcTemplate.query(sql, albumRowMapper);
-//        return albums;
-//    }
+    @Override
+    @EnumSource(value = AlbumType.class)
+    public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType) {
+        String sql = """
+                SELECT *
+                FROM albums
+                WHERE album_type = ?;
+                """;
+        List<Album> albums = jdbcTemplate.query(sql, albumRowMapper, albumType.getStringRep());
+        return albums;
+    }
 
     @Override
     public Optional<Album> getAlbumById(int id) {
