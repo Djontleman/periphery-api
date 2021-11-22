@@ -29,12 +29,12 @@ public class AlbumDataAccessService implements AlbumDAO{
     }
 
     @Override
-    @EnumSource(value = AlbumType.class)
+//    @EnumSource(value = AlbumType.class)
     public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType) {
         String sql = """
                 SELECT *
                 FROM albums
-                WHERE album_type = ?;
+                WHERE album_type = ?::album_type;
                 """;
         List<Album> albums = jdbcTemplate.query(sql, albumRowMapper, albumType.getStringRep());
         return albums;
