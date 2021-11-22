@@ -1,6 +1,7 @@
 package com.djontleman.album;
 
 import com.djontleman.exception.BadRequestException;
+import com.djontleman.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,12 @@ public class AlbumService {
                         albumTypeString.toUpperCase() + " is not a valid album type."
                 );
             }
-            return albumDAO.getAllAlbumsWhereAlbumType(albumType);
+            if (albumDAO.getCountAlbumsWhereAlbumType(albumType) > 0) { // if albums found, else
+                return albumDAO.getAllAlbumsWhereAlbumType(albumType);
+            } else {
+                throw new ResourceNotFoundException(
+                        "No albums of type " + albumTypeString.toUpperCase() + " were found.");
+            }
         } else {
             return albumDAO.getAllAlbums(); // if no parameter return all albums
         }
