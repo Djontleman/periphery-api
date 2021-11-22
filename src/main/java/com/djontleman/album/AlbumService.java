@@ -42,8 +42,20 @@ public class AlbumService {
         }
     }
 
-    public int getCountAllAlbums() {
-        return albumDAO.getCountAllAlbums();
+    public int getCountAllAlbums(String albumTypeString) {
+        if (albumTypeString != null && albumTypeString.length() > 0) { // if parameter defined
+            AlbumType albumType;
+            try {
+                albumType = AlbumType.valueOf(albumTypeString.toUpperCase()); // try to parse AlbumType
+            } catch (IllegalArgumentException e) {
+                throw new BadRequestException(
+                        albumTypeString.toUpperCase() + " is not a valid album type."
+                );
+            }
+            return albumDAO.getCountAlbumsWhereAlbumType(albumType); // return count with album type
+        } else {
+            return albumDAO.getCountAllAlbums(); // if no parameter return count of all albums
+        }
     }
 
     public Optional<Album> getAlbumById(int id) {

@@ -23,8 +23,8 @@ public class AlbumController {
     }
 
     @GetMapping("count")
-    public int getCountAllAlbums() {
-        return albumService.getCountAllAlbums();
+    public int getCountAllAlbums(@RequestParam(required = false) String type) {
+        return albumService.getCountAllAlbums(type);
     }
 
     @GetMapping("{id}")
