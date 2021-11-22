@@ -101,11 +101,11 @@ Get All Albums:
 ```roomsql
 SELECT * FROM albums;
 ```
-### Currently out-of-order
+
 Get All Albums where Album Type:
 ```roomsql
 SELECT * FROM albums
-WHERE album_type = ?;
+WHERE album_type = ?::album_type;
 ```
 
 Get All Albums where Release Year:
