@@ -19,25 +19,20 @@ public class AlbumService {
         this.albumDAO = albumDAO;
     }
 
-    public List<Album> getAllAlbums() {
-        return albumDAO.getAllAlbums();
-    }
-
     public List<Album> getAllAlbums(String albumTypeString) {
-        if (albumTypeString != null) {
-            String albumTypeStringCap =
-                    albumTypeString.substring(0, 1).toUpperCase() + albumTypeString.substring(1);
+
+        if (albumTypeString != null && albumTypeString.length() > 0) { // if parameter defined
             AlbumType albumType;
             try {
-                albumType = AlbumType.valueOf(albumTypeString.toUpperCase());
+                albumType = AlbumType.valueOf(albumTypeString.toUpperCase()); // try to parse AlbumType
             } catch (IllegalArgumentException e) {
                 throw new BadRequestException(
-                        albumTypeStringCap + " is not a valid album type."
+                        albumTypeString.toUpperCase() + " is not a valid album type."
                 );
             }
             return albumDAO.getAllAlbumsWhereAlbumType(albumType);
         } else {
-            return albumDAO.getAllAlbums();
+            return albumDAO.getAllAlbums(); // if no parameter return all albums
         }
     }
 
