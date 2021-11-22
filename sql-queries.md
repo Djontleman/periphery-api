@@ -102,9 +102,29 @@ Get All Albums:
 SELECT * FROM albums;
 ```
 
+Get All Albums where Album Type:
+```roomsql
+SELECT * FROM albums
+WHERE album_type = ?::album_type;
+```
+
+Get Count of Albums where Album Type:
+```roomsql
+SELECT COUNT(*) FROM albums
+WHERE album_type = ?::album_type; 
+```
+
+Get All Albums where Release Year:
+
 Get Album By Id:
 ```roomsql
 SELECT * FROM albums 
 WHERE id = ?;
+```
+
+Get Album By Name:
+```roomsql
+SELECT * FROM albums
+WHERE album_name = ?;
 ```
 
