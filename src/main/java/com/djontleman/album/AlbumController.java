@@ -22,6 +22,11 @@ public class AlbumController {
         return albumService.getAllAlbums(type);
     }
 
+    @GetMapping("count")
+    public int getCountAllAlbums() {
+        return albumService.getCountAllAlbums();
+    }
+
     @GetMapping("{id}")
     public Optional<Album> getAlbumById(@PathVariable int id) {
         return albumService.getAlbumById(id);

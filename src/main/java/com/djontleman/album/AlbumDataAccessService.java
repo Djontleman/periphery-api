@@ -29,6 +29,17 @@ public class AlbumDataAccessService implements AlbumDAO{
     }
 
     @Override
+    public int getCountAllAlbums() {
+        String sql = """
+                SELECT COUNT(*)
+                FROM albums;
+                """;
+        int countAlbums = jdbcTemplate.queryForObject(sql, Integer.class);
+        return countAlbums;
+    }
+
+
+    @Override
 //    @EnumSource(value = AlbumType.class)
     public List<Album> getAllAlbumsWhereAlbumType(AlbumType albumType) {
         String sql = """

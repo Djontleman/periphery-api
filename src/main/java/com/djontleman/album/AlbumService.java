@@ -42,6 +42,10 @@ public class AlbumService {
         }
     }
 
+    public int getCountAllAlbums() {
+        return albumDAO.getCountAllAlbums();
+    }
+
     public Optional<Album> getAlbumById(int id) {
         return albumDAO.getAlbumById(id);
     }
