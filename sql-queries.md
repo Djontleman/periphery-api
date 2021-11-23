@@ -213,3 +213,8 @@ SELECT * FROM albums
 WHERE album_name = ?;
 ```
 
+
+Get All Songs:
+```roomsql
+SELECT * FROM songs;
+```
