@@ -20,8 +20,14 @@ public class AlbumService {
         this.albumDAO = albumDAO;
     }
 
+    /* Get All Albums
+        If no parameter:
+            Get a list of all albums
+        If parameter AlbumType:
+            Get a list of all albums with the given album type
+            Throw Bad Request if album type is not valid
+        */
     public List<Album> getAllAlbums(String albumTypeString) {
-
         if (albumTypeString != null && albumTypeString.length() > 0) { // if parameter defined
             AlbumType albumType;
             try {
@@ -31,12 +37,7 @@ public class AlbumService {
                         albumTypeString.toUpperCase() + " is not a valid album type."
                 );
             }
-            if (albumDAO.getCountAlbumsWhereAlbumType(albumType) > 0) { // if albums found, else
-                return albumDAO.getAllAlbumsWhereAlbumType(albumType);
-            } else {
-                throw new ResourceNotFoundException(
-                        "No albums of type " + albumTypeString.toUpperCase() + " were found.");
-            }
+            return albumDAO.getAllAlbumsWhereAlbumType(albumType); // return where album type
         } else {
             return albumDAO.getAllAlbums(); // if no parameter return all albums
         }
