@@ -15,7 +15,7 @@ public class AlbumRowMapper implements RowMapper {
         Album album = new Album(
                 rs.getInt("id"),
                 rs.getString("album_name"),
-                AlbumType.valueOf(rs.getString("album_type")),
+                AlbumType.valueOf(rs.getString("album_type").toUpperCase()),
                 rs.getDate("release_date").toLocalDate(),
                 rs.getTime("album_duration").toLocalTime()
         );
