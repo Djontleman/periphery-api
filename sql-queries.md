@@ -191,15 +191,15 @@ Get All Albums:
 SELECT * FROM albums;
 ```
 
-Get Count of All Albums:
-```roomsql
-SELECT COUNT(*) FROM albums;
-```
-
 Get All Albums where Album Type:
 ```roomsql
 SELECT * FROM albums
 WHERE album_type = ?::album_type;
+```
+
+Get Count of All Albums:
+```roomsql
+SELECT COUNT(*) FROM albums;
 ```
 
 Get Count of Albums where Album Type:
