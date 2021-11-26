@@ -1,5 +1,4 @@
 # SQL Queries
-roomsql doesn't like some of my queries :(
 
 ## Database Setup
 Database Name: peripheryapi
@@ -176,6 +175,16 @@ VALUES ('Masamune', '0:06:09', 3, false, null);
 ```
 
 ## Queries
+### Create/POST
+
+Post Album:
+```roomsql
+INSERT 
+INTO albums (album_name, album_type, release_date, album_duration)
+VALUES (?, ?::album_type, ?, ?);
+```
+
+### Read/GET
 
 Get All Albums:
 ```roomsql

@@ -17,6 +17,15 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
+    // || ====================== Create/POST ====================== ||
+
+    @PostMapping
+    public void postAlbum(@RequestBody Album album) {
+        albumService.postAlbum(album);
+    }
+
+    // || ====================== Read/GET ====================== ||
+
     @GetMapping
     public List<Album> getAllAlbums(@RequestParam(required = false) String type) {
         return albumService.getAllAlbums(type);

@@ -20,6 +20,14 @@ public class AlbumService {
         this.albumDAO = albumDAO;
     }
 
+    // || ====================== Create/POST ====================== ||
+
+    public int postAlbum(Album album) {
+        return albumDAO.postAlbum(album);
+    }
+
+    // || ====================== Read/GET ====================== ||
+
     /* Get All Albums
         If no parameter:
             Get a list of all albums

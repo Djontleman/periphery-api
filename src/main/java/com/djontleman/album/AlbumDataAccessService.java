@@ -18,6 +18,22 @@ public class AlbumDataAccessService implements AlbumDAO{
 
     AlbumRowMapper albumRowMapper = new AlbumRowMapper();
 
+    // || ====================== Create/POST ====================== ||
+
+    @Override
+    public int postAlbum(Album album) {
+        String sql = """
+                INSERT 
+                INTO albums (album_name, album_type, release_date, album_duration)
+                VALUES (?, ?::album_type, ?, ?);
+                """;
+        return jdbcTemplate.update(
+                sql, album.getName(), album.getType().getStringRep(), album.getReleaseDate(), album.getDuration()
+        );
+    }
+
+    // || ====================== Read/GET ====================== ||
+
     @Override
     public List<Album> getAllAlbums() {
         String sql = """
