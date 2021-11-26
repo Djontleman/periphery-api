@@ -60,6 +60,10 @@ public class AlbumService {
     }
 
     public Optional<Album> getAlbumById(int id) {
-        return albumDAO.getAlbumById(id);
+        Optional<Album> album = albumDAO.getAlbumById(id);
+        if (album.isEmpty()) {
+            throw new ResourceNotFoundException("No album with ID: " + id);
+        }
+        return album;
     }
 }
