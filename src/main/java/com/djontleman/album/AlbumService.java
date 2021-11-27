@@ -87,6 +87,23 @@ public class AlbumService {
     // || ====================== Update/PUT/PATCH ====================== ||
 
     public int putAlbum(int id, Album album) {
+
+        // check album with id exists
+        Optional<Album> albumToBeUpdated = albumDAO.getAlbumById(id);
+        if (albumToBeUpdated.isEmpty()) {
+            throw new ResourceNotFoundException("No album with ID: " + id);
+        }
+
+        // validate input
+        if (album.getName() == null || album.getName().length() <= 0) {
+            throw new BadRequestException("Album name cannot be empty");
+        }
+        if (album.getReleaseDate() == null) {
+            throw new BadRequestException("Album release date cannot be null");
+        }
+        if (album.getDuration() == null) {
+            throw new BadRequestException("Album duration cannot be null");
+        }
         return albumDAO.putAlbum(id, album);
     }
 }
