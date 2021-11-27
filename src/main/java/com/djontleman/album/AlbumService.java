@@ -83,4 +83,10 @@ public class AlbumService {
         }
         return album;
     }
+
+    // || ====================== Update/PUT/PATCH ====================== ||
+
+    public int putAlbum(int id, Album album) {
+        return albumDAO.putAlbum(id, album);
+    }
 }

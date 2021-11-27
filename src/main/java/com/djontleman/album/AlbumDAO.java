@@ -16,4 +16,8 @@ public interface AlbumDAO {
     public int getCountAllAlbums();
     public int getCountAlbumsWhereAlbumType(AlbumType albumType);
     public Optional<Album> getAlbumById(int id);
+
+    // || ====================== Update/PUT/PATCH ====================== ||
+
+    public int putAlbum(int id, Album album);
 }

@@ -134,6 +134,13 @@ SELECT * FROM albums
 WHERE album_name = ?;
 ```
 
+Put Album:
+```roomsql
+UPDATE albums
+SET album_name = ?, album_type = ?::album_type, release_date = ?, album_duration = ?
+WHERE id = ?;
+```
+
 
 Get All Songs:
 ```roomsql

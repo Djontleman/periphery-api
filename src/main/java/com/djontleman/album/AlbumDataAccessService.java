@@ -90,5 +90,19 @@ public class AlbumDataAccessService implements AlbumDAO{
         return album;
     }
 
+    // || ====================== Update/PUT/PATCH ====================== ||
+
+    public int putAlbum(int id, Album album) {
+        String sql = """
+                UPDATE albums
+                SET album_name = ?, album_type = ?::album_type, release_date = ?, album_duration = ?
+                WHERE id = ?;
+                """;
+        return jdbcTemplate.update(
+                sql,
+                album.getName(), album.getType().getStringRep(), album.getReleaseDate(), album.getDuration(),
+                id);
+    }
+
 
 }

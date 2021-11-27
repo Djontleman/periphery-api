@@ -40,4 +40,12 @@ public class AlbumController {
     public Optional<Album> getAlbumById(@PathVariable int id) {
         return albumService.getAlbumById(id);
     }
+
+    // || ====================== Update/PUT/PATCH ====================== ||
+
+    @PutMapping("{id}")
+    public void putAlbum(@PathVariable int id, @RequestBody Album album) {
+        albumService.putAlbum(id, album);
+    }
+
 }
