@@ -110,6 +110,11 @@ public class AlbumService {
     // || ====================== Delete/DELETE ====================== ||
 
     public int deleteAlbum(int id) {
+        // check album with id exists
+        Optional<Album> albumToBeUpdated = albumDAO.getAlbumById(id);
+        if (albumToBeUpdated.isEmpty()) {
+            throw new ResourceNotFoundException("No album with ID: " + id);
+        }
         return albumDAO.deleteAlbum(id);
     }
 }
