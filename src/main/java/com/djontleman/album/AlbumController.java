@@ -1,6 +1,7 @@
 package com.djontleman.album;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class AlbumController {
     // || ====================== Create/POST ====================== ||
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void postAlbum(@RequestBody Album album) {
         albumService.postAlbum(album);
     }
@@ -27,16 +29,19 @@ public class AlbumController {
     // || ====================== Read/GET ====================== ||
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Album> getAllAlbums(@RequestParam(required = false) String type) {
         return albumService.getAllAlbums(type);
     }
 
     @GetMapping("count")
+    @ResponseStatus(HttpStatus.OK)
     public int getCountAllAlbums(@RequestParam(required = false) String type) {
         return albumService.getCountAllAlbums(type);
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Optional<Album> getAlbumById(@PathVariable int id) {
         return albumService.getAlbumById(id);
     }
@@ -44,6 +49,7 @@ public class AlbumController {
     // || ====================== Update/PUT/PATCH ====================== ||
 
     @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void putAlbum(@PathVariable int id, @RequestBody Album album) {
         albumService.putAlbum(id, album);
     }
