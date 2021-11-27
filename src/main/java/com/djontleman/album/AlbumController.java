@@ -54,4 +54,12 @@ public class AlbumController {
         albumService.putAlbum(id, album);
     }
 
+    // || ====================== Delete/DELETE ====================== ||
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAlbum(@PathVariable int id) {
+        albumService.deleteAlbum(id);
+    }
+
 }

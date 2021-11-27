@@ -141,6 +141,12 @@ SET album_name = ?, album_type = ?::album_type, release_date = ?, album_duration
 WHERE id = ?;
 ```
 
+Delete Album:
+```roomsql
+DELETE FROM albums
+WHERE id = ?;
+```
+
 
 Get All Songs:
 ```roomsql

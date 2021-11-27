@@ -20,4 +20,8 @@ public interface AlbumDAO {
     // || ====================== Update/PUT/PATCH ====================== ||
 
     public int putAlbum(int id, Album album);
+
+    // || ====================== Delete/DELETE ====================== ||
+
+    public int deleteAlbum(int id);
 }

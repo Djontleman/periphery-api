@@ -106,4 +106,10 @@ public class AlbumService {
         }
         return albumDAO.putAlbum(id, album);
     }
+
+    // || ====================== Delete/DELETE ====================== ||
+
+    public int deleteAlbum(int id) {
+        return albumDAO.deleteAlbum(id);
+    }
 }

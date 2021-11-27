@@ -104,5 +104,13 @@ public class AlbumDataAccessService implements AlbumDAO{
                 id);
     }
 
+    // || ====================== Delete/DELETE ====================== ||
 
+    public int deleteAlbum(int id) {
+        String sql = """
+                DELETE FROM albums
+                WHERE id = ?;
+                """;
+        return jdbcTemplate.update(sql, id);
+    }
 }
