@@ -97,6 +97,15 @@ Get Count of All Albums:
 SELECT COUNT(*) FROM albums;
 ```
 
+Get Valid Album Types:
+```roomsql
+SELECT enum_range(NULL::album_type);
+```
+or
+```roomsql
+SELECT unnest(enum_range(NULL::album_type));
+```
+
 Get Count of Albums where Album Type:
 ```roomsql
 SELECT COUNT(*) FROM albums
@@ -121,4 +130,13 @@ WHERE album_name = ?;
 Get All Songs:
 ```roomsql
 SELECT * FROM songs;
+```
+
+Get Valid Guitar Types:
+```roomsql
+SELECT enum_range(NULL::guitar_type);
+```
+or
+```roomsql
+SELECT unnest(enum_range(NULL::guitar_type));
 ```
