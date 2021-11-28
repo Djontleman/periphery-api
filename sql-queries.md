@@ -153,6 +153,12 @@ Get All Songs:
 SELECT * FROM songs;
 ```
 
+Get Song by ID:
+```roomsql
+SELECT * FROM songs
+WHERE id = ?
+```
+
 Get Valid Guitar Types:
 ```roomsql
 SELECT enum_range(NULL::guitar_type);

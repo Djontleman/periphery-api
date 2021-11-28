@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository("postgresSong")
 public class SongDataAccessService implements SongDAO {
@@ -17,6 +18,8 @@ public class SongDataAccessService implements SongDAO {
         this.songRowMapper = new SongRowMapper();
     }
 
+    // || ====================== Read/GET ====================== ||
+
     @Override
     public List<Song> getAllSongs() {
         String sql = """
@@ -24,6 +27,18 @@ public class SongDataAccessService implements SongDAO {
                 FROM songs;
                 """;
         return jdbcTemplate.query(sql, songRowMapper);
+    }
+
+    @Override
+    public Optional<Song> getSongById(int id) {
+        String sql = """
+                SELECT * 
+                FROM songs
+                WHERE id = ?
+                """;
+        return jdbcTemplate.query(sql, songRowMapper, id)
+                .stream()
+                .findFirst();
     }
 
 }
