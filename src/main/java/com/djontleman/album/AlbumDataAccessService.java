@@ -92,6 +92,7 @@ public class AlbumDataAccessService implements AlbumDAO{
 
     // || ====================== Update/PUT/PATCH ====================== ||
 
+    @Override
     public int putAlbum(int id, Album album) {
         String sql = """
                 UPDATE albums
@@ -106,6 +107,7 @@ public class AlbumDataAccessService implements AlbumDAO{
 
     // || ====================== Delete/DELETE ====================== ||
 
+    @Override
     public int deleteAlbum(int id) {
         String sql = """
                 DELETE FROM albums
