@@ -12,7 +12,6 @@ public class SongRowMapper implements RowMapper {
                 rs.getInt("id"),
                 rs.getString("song_name"),
                 rs.getTime("song_duration").toLocalTime(),
-                rs.getInt("album_id"),
                 rs.getBoolean("has_music_video"),
                 rs.getInt("tuning_id")
         );
