@@ -18,6 +18,21 @@ public class SongDataAccessService implements SongDAO {
         this.songRowMapper = new SongRowMapper();
     }
 
+    // || ====================== Create/POST ====================== ||
+
+    @Override
+    public int postSong(Song song) {
+        String sql = """
+                INSERT INTO songs
+                (song_name, song_duration, has_music_video, tuning_id)
+                VALUES (?, ?, ?, ?);
+                """;
+        return jdbcTemplate.update(
+                sql,
+                song.getName(), song.getDuration(), song.isHasMusicVideo(), song.getTuningId()
+        );
+    }
+
     // || ====================== Read/GET ====================== ||
 
     @Override

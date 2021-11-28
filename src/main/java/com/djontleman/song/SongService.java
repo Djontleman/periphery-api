@@ -18,6 +18,12 @@ public class SongService {
         this.songDAO = songDAO;
     }
 
+    // || ====================== Create/POST ====================== ||
+
+    public int postSong(Song song) {
+        return songDAO.postSong(song);
+    }
+
     // || ====================== Read/GET ====================== ||
 
     public List<Song> getAllSongs() {

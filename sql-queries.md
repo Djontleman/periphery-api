@@ -148,6 +148,13 @@ WHERE id = ?;
 ```
 
 
+Post Song:
+```roomsql
+INSERT INTO songs
+(song_name, song_duration, has_music_video, tuning_id)
+VALUES (?, ?, ?, ?);
+```
+
 Get All Songs:
 ```roomsql
 SELECT * FROM songs;
