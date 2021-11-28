@@ -8,9 +8,9 @@ public class Song {
    private String name;
    private LocalTime duration;
    private boolean hasMusicVideo;
-   private int tuningId;
+   private Integer tuningId;
 
-    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, int tuningId) {
+    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId) {
         this.id = id;
         this.name = name;
         this.duration = duration;
@@ -50,11 +50,11 @@ public class Song {
         this.hasMusicVideo = hasMusicVideo;
     }
 
-    public int getTuningId() {
+    public Integer getTuningId() {
         return tuningId;
     }
 
-    public void setTuningId(int tuningId) {
+    public void setTuningId(Integer tuningId) {
         this.tuningId = tuningId;
     }
 
@@ -74,7 +74,7 @@ public class Song {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Song song = (Song) o;
-        return id == song.id && hasMusicVideo == song.hasMusicVideo && tuningId == song.tuningId && Objects.equals(name, song.name) && Objects.equals(duration, song.duration);
+        return id == song.id && hasMusicVideo == song.hasMusicVideo && Objects.equals(name, song.name) && Objects.equals(duration, song.duration) && Objects.equals(tuningId, song.tuningId);
     }
 
     @Override
