@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("postgres")
+@Repository("postgresAlbum")
 public class AlbumDataAccessService implements AlbumDAO{
 
     private JdbcTemplate jdbcTemplate;

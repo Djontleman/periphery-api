@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -16,7 +15,7 @@ public class AlbumService {
     private AlbumDAO albumDAO;
 
     @Autowired
-    public AlbumService(@Qualifier("postgres") AlbumDAO albumDAO) {
+    public AlbumService(@Qualifier("postgresAlbum") AlbumDAO albumDAO) {
         this.albumDAO = albumDAO;
     }
 
