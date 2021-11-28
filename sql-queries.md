@@ -77,7 +77,7 @@ CREATE TABLE albums_songs (
 );
 ```
 
-## Queries
+## Queries: Albums
 ### Create/POST
 
 Post Album:
@@ -94,6 +94,15 @@ Get All Albums:
 SELECT * FROM albums;
 ```
 
+Get Valid Album Types:
+```roomsql
+SELECT enum_range(NULL::album_type);
+```
+or
+```roomsql
+SELECT unnest(enum_range(NULL::album_type));
+```
+
 Get All Albums where Album Type:
 ```roomsql
 SELECT * FROM albums
@@ -103,15 +112,6 @@ WHERE album_type = ?::album_type;
 Get Count of All Albums:
 ```roomsql
 SELECT COUNT(*) FROM albums;
-```
-
-Get Valid Album Types:
-```roomsql
-SELECT enum_range(NULL::album_type);
-```
-or
-```roomsql
-SELECT unnest(enum_range(NULL::album_type));
 ```
 
 Get Count of Albums where Album Type:
@@ -134,6 +134,8 @@ SELECT * FROM albums
 WHERE album_name = ?;
 ```
 
+### Update/PUT
+
 Put Album:
 ```roomsql
 UPDATE albums
@@ -141,12 +143,16 @@ SET album_name = ?, album_type = ?::album_type, release_date = ?, album_duration
 WHERE id = ?;
 ```
 
+### Delete/DELETE
+
 Delete Album:
 ```roomsql
 DELETE FROM albums
 WHERE id = ?;
 ```
 
+## Queries: Songs
+### Create/POST
 
 Post Song:
 ```roomsql
@@ -154,6 +160,8 @@ INSERT INTO songs
 (song_name, song_duration, has_music_video, tuning_id)
 VALUES (?, ?, ?, ?);
 ```
+
+### Read/GET
 
 Get All Songs:
 ```roomsql
