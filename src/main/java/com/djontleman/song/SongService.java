@@ -1,5 +1,6 @@
 package com.djontleman.song;
 
+import com.djontleman.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class SongService {
     }
 
     public Optional<Song> getSongById(int id) {
-        return songDAO.getSongById(id);
+        Optional<Song> song = songDAO.getSongById(id);
+        if (song.isEmpty()) {
+            throw new ResourceNotFoundException("No song with ID: " + id);
+        }
+        return song;
     }
 }
