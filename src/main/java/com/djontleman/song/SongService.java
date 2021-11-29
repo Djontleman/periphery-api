@@ -47,6 +47,10 @@ public class SongService {
     // || ====================== Delete/DELETE ====================== ||
 
     public int deleteSong(int id) {
+        Optional<Song> song = songDAO.getSongById(id);
+        if (song.isEmpty()) {
+            throw new ResourceNotFoundException("No song with ID: " + id);
+        }
         return songDAO.deleteSong(id);
     }
 }
