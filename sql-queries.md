@@ -182,3 +182,12 @@ or
 ```roomsql
 SELECT unnest(enum_range(NULL::guitar_type));
 ```
+
+### Update/PUT
+
+Put Song:
+```roomsql
+UPDATE songs
+SET song_name = ?, song_duration = ?, has_music_video = ?, tuning_id = ?
+WHERE id = ?;
+```

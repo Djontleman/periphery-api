@@ -35,4 +35,11 @@ public class SongController {
     public Optional<Song> getSongById(@PathVariable("id") int id) {
         return songService.getSongById(id);
     }
+
+    // || ====================== Update/PUT ====================== ||
+
+    @PutMapping("{id}")
+    public void putSong(@PathVariable int id, @RequestBody Song song) {
+        songService.putSong(id, song);
+    }
 }

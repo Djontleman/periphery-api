@@ -37,4 +37,10 @@ public class SongService {
         }
         return song;
     }
+
+    // || ====================== Update/PUT ====================== ||
+
+    public int putSong(int id, Song song) {
+        return songDAO.putSong(id, song);
+    }
 }

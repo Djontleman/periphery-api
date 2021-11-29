@@ -56,4 +56,20 @@ public class SongDataAccessService implements SongDAO {
                 .findFirst();
     }
 
+    // || ====================== Update/PUT ====================== ||
+
+    @Override
+    public int putSong(int id, Song song) {
+        String sql = """
+                UPDATE songs
+                SET song_name = ?, song_duration = ?, has_music_video = ?, tuning_id = ?
+                WHERE id = ?;
+                """;
+        return jdbcTemplate.update(
+                sql,
+                song.getName(), song.getDuration(), song.isHasMusicVideo(), song.getTuningId(),
+                id
+        );
+    }
+
 }
