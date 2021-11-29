@@ -72,4 +72,14 @@ public class SongDataAccessService implements SongDAO {
         );
     }
 
+    // || ====================== Delete/DELETE ====================== ||
+
+    @Override
+    public int deleteSong(int id) {
+        String sql = """
+                DELETE FROM songs
+                WHERE id = ?;
+                """;
+        return jdbcTemplate.update(sql, id);
+    }
 }

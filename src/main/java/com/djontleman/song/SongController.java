@@ -42,4 +42,11 @@ public class SongController {
     public void putSong(@PathVariable int id, @RequestBody Song song) {
         songService.putSong(id, song);
     }
+
+    // || ====================== Delete/DELETE ====================== ||
+
+    @DeleteMapping("{id}")
+    public void deleteSong(@PathVariable int id) {
+        songService.deleteSong(id);
+    }
 }

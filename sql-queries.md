@@ -191,3 +191,11 @@ UPDATE songs
 SET song_name = ?, song_duration = ?, has_music_video = ?, tuning_id = ?
 WHERE id = ?;
 ```
+
+### Delete/DELETE
+
+Delete Song:
+```roomsql
+DELETE FROM songs
+WHERE id = ?;
+```

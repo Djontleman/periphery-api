@@ -17,4 +17,8 @@ public interface SongDAO {
     // || ====================== Update/PUT ====================== ||
 
     public int putSong(int id, Song song);
+
+    // || ====================== Delete/DELETE ====================== ||
+
+    public int deleteSong(int id);
 }

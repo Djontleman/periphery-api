@@ -43,4 +43,10 @@ public class SongService {
     public int putSong(int id, Song song) {
         return songDAO.putSong(id, song);
     }
+
+    // || ====================== Delete/DELETE ====================== ||
+
+    public int deleteSong(int id) {
+        return songDAO.deleteSong(id);
+    }
 }
