@@ -1,7 +1,10 @@
 package com.djontleman.album;
 
+import com.djontleman.song.Song;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 public class Album {
@@ -10,13 +13,15 @@ public class Album {
     private AlbumType type;
     private LocalDate releaseDate;
     private LocalTime duration;
+    private List<Song> songList;
 
-    public Album(int id, String name, AlbumType type, LocalDate releaseDate, LocalTime duration) {
+    public Album(int id, String name, AlbumType type, LocalDate releaseDate, LocalTime duration, List<Song> songList) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.releaseDate = releaseDate;
         this.duration = duration;
+        this.songList = songList;
     }
 
     public int getId() {
@@ -59,6 +64,14 @@ public class Album {
         this.duration = duration;
     }
 
+    public List<Song> getSongList() {
+        return songList;
+    }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
     @Override
     public String toString() {
         return "Album{" +
@@ -67,6 +80,7 @@ public class Album {
                 ", type=" + type +
                 ", releaseDate=" + releaseDate +
                 ", duration=" + duration +
+                ", songList=" + songList +
                 '}';
     }
 
@@ -75,11 +89,11 @@ public class Album {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Album album = (Album) o;
-        return id == album.id && Objects.equals(name, album.name) && type == album.type && Objects.equals(releaseDate, album.releaseDate) && Objects.equals(duration, album.duration);
+        return id == album.id && Objects.equals(name, album.name) && type == album.type && Objects.equals(releaseDate, album.releaseDate) && Objects.equals(duration, album.duration) && Objects.equals(songList, album.songList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, type, releaseDate, duration);
+        return Objects.hash(id, name, type, releaseDate, duration, songList);
     }
 }

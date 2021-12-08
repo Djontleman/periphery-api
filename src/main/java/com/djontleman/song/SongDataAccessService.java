@@ -56,6 +56,17 @@ public class SongDataAccessService implements SongDAO {
                 .findFirst();
     }
 
+    @Override
+    public List<Song> getSongsByAlbumId(int id) {
+        String sql = """
+                SELECT * FROM songs
+                INNER JOIN albums_songs ON songs.id = albums_songs.song_id
+                INNER JOIN albums ON albums_songs.album_id = albums.id
+                WHERE albums.id = ?;
+                """;
+        return jdbcTemplate.query(sql, songRowMapper, id);
+    }
+
     // || ====================== Update/PUT ====================== ||
 
     @Override

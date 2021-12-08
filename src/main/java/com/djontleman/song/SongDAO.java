@@ -13,6 +13,7 @@ public interface SongDAO {
 
     public List<Song> getAllSongs();
     public Optional<Song> getSongById(int id);
+    public List<Song> getSongsByAlbumId(int id);
 
     // || ====================== Update/PUT ====================== ||
 

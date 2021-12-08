@@ -1,6 +1,8 @@
 package com.djontleman.album;
 
 import org.junit.jupiter.params.provider.EnumSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,12 +13,13 @@ import java.util.Optional;
 public class AlbumDataAccessService implements AlbumDAO{
 
     private JdbcTemplate jdbcTemplate;
+    private AlbumRowMapper albumRowMapper;
 
-    public AlbumDataAccessService(JdbcTemplate jdbcTemplate) {
+    @Autowired
+    public AlbumDataAccessService(JdbcTemplate jdbcTemplate, AlbumRowMapper albumRowMapper) {
         this.jdbcTemplate = jdbcTemplate;
+        this.albumRowMapper = albumRowMapper;
     }
-
-    AlbumRowMapper albumRowMapper = new AlbumRowMapper();
 
     // || ====================== Create/POST ====================== ||
 

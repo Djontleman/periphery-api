@@ -174,6 +174,14 @@ SELECT * FROM songs
 WHERE id = ?
 ```
 
+Get Songs by Album ID:
+```roomsql
+SELECT * FROM songs 
+INNER JOIN albums_songs ON songs.id = albums_songs.song_id 
+INNER JOIN albums ON albums_songs.album_id = albums.id 
+WHERE albums.id = ?;
+```
+
 Get Valid Guitar Types:
 ```roomsql
 SELECT enum_range(NULL::guitar_type);
