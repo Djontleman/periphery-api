@@ -30,13 +30,13 @@ public class AlbumController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Album> getAllAlbums(@RequestParam(required = false) String type) {
+    public List<Album> getAllAlbums(@RequestParam(required = false) AlbumType type) {
         return albumService.getAllAlbums(type);
     }
 
     @GetMapping("count")
     @ResponseStatus(HttpStatus.OK)
-    public int getCountAllAlbums(@RequestParam(required = false) String type) {
+    public int getCountAllAlbums(@RequestParam(required = false) AlbumType type) {
         return albumService.getCountAllAlbums(type);
     }
 

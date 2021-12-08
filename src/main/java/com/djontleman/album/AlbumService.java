@@ -25,6 +25,9 @@ public class AlbumService {
         if (album.getName() == null || album.getName().length() <= 0) {
             throw new BadRequestException("Album name cannot be empty");
         }
+        if (album.getType() == null) {
+            throw new BadRequestException("Album type cannot be null");
+        }
         if (album.getReleaseDate() == null) {
             throw new BadRequestException("Album release date cannot be null");
         }
@@ -36,39 +39,16 @@ public class AlbumService {
 
     // || ====================== Read/GET ====================== ||
 
-    /* Get All Albums
-        If no parameter:
-            Get a list of all albums
-        If parameter AlbumType:
-            Get a list of all albums with the given album type
-            Throw Bad Request if album type is not valid
-        */
-    public List<Album> getAllAlbums(String albumTypeString) {
-        if (albumTypeString != null && albumTypeString.length() > 0) { // if parameter defined
-            AlbumType albumType;
-            try {
-                albumType = AlbumType.valueOf(albumTypeString.toUpperCase()); // try to parse AlbumType
-            } catch (IllegalArgumentException e) {
-                throw new BadRequestException(
-                        albumTypeString.toUpperCase() + " is not a valid album type."
-                );
-            }
+    public List<Album> getAllAlbums(AlbumType albumType) {
+        if (albumType != null) { // if parameter defined
             return albumDAO.getAllAlbumsWhereAlbumType(albumType); // return where album type
         } else {
             return albumDAO.getAllAlbums(); // if no parameter return all albums
         }
     }
 
-    public int getCountAllAlbums(String albumTypeString) {
-        if (albumTypeString != null && albumTypeString.length() > 0) { // if parameter defined
-            AlbumType albumType;
-            try {
-                albumType = AlbumType.valueOf(albumTypeString.toUpperCase()); // try to parse AlbumType
-            } catch (IllegalArgumentException e) {
-                throw new BadRequestException(
-                        albumTypeString.toUpperCase() + " is not a valid album type."
-                );
-            }
+    public int getCountAllAlbums(AlbumType albumType) {
+        if (albumType != null) { // if parameter defined
             return albumDAO.getCountAlbumsWhereAlbumType(albumType); // return count with album type
         } else {
             return albumDAO.getCountAllAlbums(); // if no parameter return count of all albums
@@ -96,6 +76,9 @@ public class AlbumService {
         // validate input
         if (album.getName() == null || album.getName().length() <= 0) {
             throw new BadRequestException("Album name cannot be empty");
+        }
+        if (album.getType() == null) {
+            throw new BadRequestException("Album type cannot be null");
         }
         if (album.getReleaseDate() == null) {
             throw new BadRequestException("Album release date cannot be null");
