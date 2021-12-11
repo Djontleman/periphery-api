@@ -1,11 +1,14 @@
 package com.djontleman.song;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class SongRowMapper implements RowMapper {
+
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         Song song = new Song(
