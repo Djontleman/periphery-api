@@ -93,6 +93,16 @@ public class AlbumDataAccessService implements AlbumDAO{
         return album;
     }
 
+    @Override
+    public List<Album> getAlbumsBySongId(int id) {
+        String sql = """
+                SELECT * FROM albums
+                INNER JOIN albums_songs ON albums.id = albums_songs.album_id
+                WHERE albums_songs.song_id = ?;
+                """;
+        return jdbcTemplate.query(sql, albumRowMapper, id);
+    }
+
     // || ====================== Update/PUT/PATCH ====================== ||
 
     @Override

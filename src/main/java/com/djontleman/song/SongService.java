@@ -30,7 +30,9 @@ public class SongService {
     // || ====================== Read/GET ====================== ||
 
     public List<Song> getAllSongs() {
-        return songDAO.getAllSongs();
+        List<Song> songs = songDAO.getAllSongs();
+        songs.forEach(song -> song.setAlbumList(albumDAO.getAlbumsBySongId(song.getId())));
+        return songs;
     }
 
     public Optional<Song> getSongById(int id) {

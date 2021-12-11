@@ -128,6 +128,13 @@ SELECT * FROM albums
 WHERE id = ?;
 ```
 
+Get Albums By Song Id:
+```roomsql
+SELECT * FROM albums
+INNER JOIN albums_songs ON albums.id = albums_songs.album_id
+WHERE albums_songs.song_id = ?;
+```
+
 Get Album By Name:
 ```roomsql
 SELECT * FROM albums
