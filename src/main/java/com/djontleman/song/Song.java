@@ -1,5 +1,8 @@
 package com.djontleman.song;
 
+import com.djontleman.album.Album;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -9,13 +12,16 @@ public class Song {
    private LocalTime duration;
    private boolean hasMusicVideo;
    private Integer tuningId;
+   @JsonIgnoreProperties("songList")
+   private Album album;
 
-    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId) {
+    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId, Album album) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.hasMusicVideo = hasMusicVideo;
         this.tuningId = tuningId;
+        this.album = album;
     }
 
     public int getId() {
@@ -58,6 +64,14 @@ public class Song {
         this.tuningId = tuningId;
     }
 
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
@@ -66,6 +80,7 @@ public class Song {
                 ", duration=" + duration +
                 ", hasMusicVideo=" + hasMusicVideo +
                 ", tuningId=" + tuningId +
+                ", album=" + album +
                 '}';
     }
 
@@ -74,11 +89,11 @@ public class Song {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Song song = (Song) o;
-        return id == song.id && hasMusicVideo == song.hasMusicVideo && Objects.equals(name, song.name) && Objects.equals(duration, song.duration) && Objects.equals(tuningId, song.tuningId);
+        return id == song.id && hasMusicVideo == song.hasMusicVideo && Objects.equals(name, song.name) && Objects.equals(duration, song.duration) && Objects.equals(tuningId, song.tuningId) && Objects.equals(album, song.album);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, duration, hasMusicVideo, tuningId);
+        return Objects.hash(id, name, duration, hasMusicVideo, tuningId, album);
     }
 }

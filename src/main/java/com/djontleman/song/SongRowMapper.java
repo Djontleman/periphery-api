@@ -13,7 +13,8 @@ public class SongRowMapper implements RowMapper {
                 rs.getString("song_name"),
                 rs.getTime("song_duration").toLocalTime(),
                 rs.getBoolean("has_music_video"),
-                rs.getInt("tuning_id")
+                rs.getInt("tuning_id"),
+                null
         );
         return song;
     }

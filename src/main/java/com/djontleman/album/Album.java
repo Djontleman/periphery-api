@@ -1,6 +1,7 @@
 package com.djontleman.album;
 
 import com.djontleman.song.Song;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,6 +14,7 @@ public class Album {
     private AlbumType type;
     private LocalDate releaseDate;
     private LocalTime duration;
+    @JsonIgnoreProperties("album")
     private List<Song> songList;
 
     public Album(int id, String name, AlbumType type, LocalDate releaseDate, LocalTime duration, List<Song> songList) {
