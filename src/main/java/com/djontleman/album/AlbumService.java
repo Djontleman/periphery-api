@@ -2,6 +2,7 @@ package com.djontleman.album;
 
 import com.djontleman.exception.BadRequestException;
 import com.djontleman.exception.ResourceNotFoundException;
+import com.djontleman.song.SongDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class AlbumService {
 
     private AlbumDAO albumDAO;
+    private SongDAO songDAO;
 
     @Autowired
-    public AlbumService(@Qualifier("postgresAlbum") AlbumDAO albumDAO) {
+    public AlbumService(@Qualifier("postgresAlbum") AlbumDAO albumDAO, @Qualifier("postgresSong") SongDAO songDAO) {
         this.albumDAO = albumDAO;
+        this.songDAO = songDAO;
     }
 
     // || ====================== Create/POST ====================== ||
