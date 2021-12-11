@@ -62,11 +62,13 @@ public class AlbumService {
     }
 
     public Optional<Album> getAlbumById(int id) {
-        Optional<Album> album = albumDAO.getAlbumById(id);
-        if (album.isEmpty()) {
+        Optional<Album> albumOptional = albumDAO.getAlbumById(id);
+        if (albumOptional.isEmpty()) {
             throw new ResourceNotFoundException("No album with ID: " + id);
         }
-        return album;
+        Album album = albumOptional.get();
+        album.setSongList(songDAO.getSongsByAlbumId(album.getId()));
+        return Optional.of(album);
     }
 
     // || ====================== Update/PUT/PATCH ====================== ||
