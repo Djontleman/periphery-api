@@ -177,9 +177,8 @@ WHERE id = ?
 Get Songs by Album ID:
 ```roomsql
 SELECT * FROM songs 
-INNER JOIN albums_songs ON songs.id = albums_songs.song_id 
-INNER JOIN albums ON albums_songs.album_id = albums.id 
-WHERE albums.id = ?;
+INNER JOIN albums_songs ON songs.id = albums_songs.song_id  
+WHERE albums_songs.album_id = ?;
 ```
 
 Get Valid Guitar Types:
