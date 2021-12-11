@@ -43,11 +43,14 @@ public class AlbumService {
     // || ====================== Read/GET ====================== ||
 
     public List<Album> getAllAlbums(AlbumType albumType) {
+        List<Album> albums;
         if (albumType != null) { // if parameter defined
-            return albumDAO.getAllAlbumsWhereAlbumType(albumType); // return where album type
+            albums = albumDAO.getAllAlbumsWhereAlbumType(albumType); // return where album type
         } else {
-            return albumDAO.getAllAlbums(); // if no parameter return all albums
+            albums = albumDAO.getAllAlbums(); // if no parameter return all albums
         }
+        albums.forEach(album -> album.setSongList(songDAO.getSongsByAlbumId(album.getId())));
+        return albums;
     }
 
     public int getCountAllAlbums(AlbumType albumType) {
