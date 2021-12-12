@@ -36,11 +36,13 @@ public class SongService {
     }
 
     public Optional<Song> getSongById(int id) {
-        Optional<Song> song = songDAO.getSongById(id);
-        if (song.isEmpty()) {
+        Optional<Song> songOptional = songDAO.getSongById(id);
+        if (songOptional.isEmpty()) {
             throw new ResourceNotFoundException("No song with ID: " + id);
         }
-        return song;
+        Song song = songOptional.get();
+        song.setAlbumList(albumDAO.getAlbumsBySongId(id));
+        return Optional.of(song);
     }
 
     // || ====================== Update/PUT ====================== ||
