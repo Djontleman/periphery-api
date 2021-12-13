@@ -14,15 +14,15 @@ public class Song {
    private boolean hasMusicVideo;
    private Integer tuningId;
    @JsonIgnoreProperties("songList")
-   private List<Album> albumList;
+   private List<Album> albumsOn;
 
-    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId, List<Album> albumList) {
+    public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId, List<Album> albumsOn) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.hasMusicVideo = hasMusicVideo;
         this.tuningId = tuningId;
-        this.albumList = albumList;
+        this.albumsOn = albumsOn;
     }
 
     public int getId() {
@@ -65,12 +65,12 @@ public class Song {
         this.tuningId = tuningId;
     }
 
-    public List<Album> getAlbumList() {
-        return albumList;
+    public List<Album> getAlbumsOn() {
+        return albumsOn;
     }
 
-    public void setAlbumList(List<Album> albumList) {
-        this.albumList = albumList;
+    public void setAlbumsOn(List<Album> albumsOn) {
+        this.albumsOn = albumsOn;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Song {
                 ", duration=" + duration +
                 ", hasMusicVideo=" + hasMusicVideo +
                 ", tuningId=" + tuningId +
-                ", albumList=" + albumList +
+                ", albumsOn=" + albumsOn +
                 '}';
     }
 
@@ -90,11 +90,11 @@ public class Song {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Song song = (Song) o;
-        return id == song.id && hasMusicVideo == song.hasMusicVideo && Objects.equals(name, song.name) && Objects.equals(duration, song.duration) && Objects.equals(tuningId, song.tuningId) && Objects.equals(albumList, song.albumList);
+        return id == song.id && hasMusicVideo == song.hasMusicVideo && Objects.equals(name, song.name) && Objects.equals(duration, song.duration) && Objects.equals(tuningId, song.tuningId) && Objects.equals(albumsOn, song.albumsOn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, duration, hasMusicVideo, tuningId, albumList);
+        return Objects.hash(id, name, duration, hasMusicVideo, tuningId, albumsOn);
     }
 }

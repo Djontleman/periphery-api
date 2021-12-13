@@ -14,7 +14,7 @@ public class Album {
     private AlbumType type;
     private LocalDate releaseDate;
     private LocalTime duration;
-    @JsonIgnoreProperties("albumList")
+    @JsonIgnoreProperties("albumsOn")
     private List<Song> songList;
 
     public Album(int id, String name, AlbumType type, LocalDate releaseDate, LocalTime duration, List<Song> songList) {

@@ -31,7 +31,7 @@ public class SongService {
 
     public List<Song> getAllSongs() {
         List<Song> songs = songDAO.getAllSongs();
-        songs.forEach(song -> song.setAlbumList(albumDAO.getAlbumsBySongId(song.getId())));
+        songs.forEach(song -> song.setAlbumsOn(albumDAO.getAlbumsBySongId(song.getId())));
         return songs;
     }
 
@@ -41,7 +41,7 @@ public class SongService {
             throw new ResourceNotFoundException("No song with ID: " + id);
         }
         Song song = songOptional.get();
-        song.setAlbumList(albumDAO.getAlbumsBySongId(id));
+        song.setAlbumsOn(albumDAO.getAlbumsBySongId(id));
         return Optional.of(song);
     }
 
