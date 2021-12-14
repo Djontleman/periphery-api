@@ -1,5 +1,6 @@
 package com.djontleman.song;
 
+import com.djontleman.album.Album;
 import com.djontleman.album.AlbumDAO;
 import com.djontleman.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.djontleman.album.AlbumService.getAlbumDuration;
 
 @Service
 public class SongService {
@@ -31,7 +34,16 @@ public class SongService {
 
     public List<Song> getAllSongs() {
         List<Song> songs = songDAO.getAllSongs();
-        songs.forEach(song -> song.setAlbumsOn(albumDAO.getAlbumsBySongId(song.getId())));
+        songs.forEach(song -> {
+            List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
+
+            albumsOn.forEach(album -> {
+                List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
+                album.setDuration(getAlbumDuration(songList));
+            });
+
+            song.setAlbumsOn(albumsOn);
+        });
         return songs;
     }
 
@@ -40,8 +52,17 @@ public class SongService {
         if (songOptional.isEmpty()) {
             throw new ResourceNotFoundException("No song with ID: " + id);
         }
+
         Song song = songOptional.get();
-        song.setAlbumsOn(albumDAO.getAlbumsBySongId(id));
+        List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
+
+        albumsOn.forEach(album -> {
+            List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
+            album.setDuration(getAlbumDuration(songList));
+        });
+
+        song.setAlbumsOn(albumsOn);
+
         return Optional.of(song);
     }
 
