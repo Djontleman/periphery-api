@@ -27,11 +27,11 @@ public class AlbumDataAccessService implements AlbumDAO{
     public int postAlbum(Album album) {
         String sql = """
                 INSERT 
-                INTO albums (album_name, album_type, release_date, album_duration)
+                INTO albums (album_name, album_type, release_date)
                 VALUES (?, ?::album_type, ?, ?);
                 """;
         return jdbcTemplate.update(
-                sql, album.getName(), album.getType().getStringRep(), album.getReleaseDate(), album.getDuration()
+                sql, album.getName(), album.getType().getStringRep(), album.getReleaseDate()
         );
     }
 
@@ -109,12 +109,12 @@ public class AlbumDataAccessService implements AlbumDAO{
     public int putAlbum(int id, Album album) {
         String sql = """
                 UPDATE albums
-                SET album_name = ?, album_type = ?::album_type, release_date = ?, album_duration = ?
+                SET album_name = ?, album_type = ?::album_type, release_date = ?
                 WHERE id = ?;
                 """;
         return jdbcTemplate.update(
                 sql,
-                album.getName(), album.getType().getStringRep(), album.getReleaseDate(), album.getDuration(),
+                album.getName(), album.getType().getStringRep(), album.getReleaseDate(),
                 id);
     }
 
