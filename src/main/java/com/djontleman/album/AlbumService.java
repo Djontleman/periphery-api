@@ -51,18 +51,13 @@ public class AlbumService {
         } else {
             albums = albumDAO.getAllAlbums(); // if no parameter return all albums
         }
+
         albums.forEach(album -> {
             List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
-            LocalTime durationSum = LocalTime.of(0, 0, 0);
-
-            for (Song song : songList) {
-                durationSum = durationSum.plusHours(song.getDuration().getHour());
-                durationSum = durationSum.plusMinutes(song.getDuration().getMinute());
-                durationSum = durationSum.plusSeconds(song.getDuration().getSecond());
-            }
-            album.setDuration(durationSum);
             album.setSongList(songList);
+            album.setDuration(getAlbumDuration(songList));
         });
+
         return albums;
     }
 
@@ -79,8 +74,12 @@ public class AlbumService {
         if (albumOptional.isEmpty()) {
             throw new ResourceNotFoundException("No album with ID: " + id);
         }
+
         Album album = albumOptional.get();
-        album.setSongList(songDAO.getSongsByAlbumId(album.getId()));
+        List<Song> songList = songDAO.getSongsByAlbumId(id);
+        album.setSongList(songList);
+        album.setDuration(getAlbumDuration(songList));
+
         return Optional.of(album);
     }
 
@@ -119,5 +118,19 @@ public class AlbumService {
             throw new ResourceNotFoundException("No album with ID: " + id);
         }
         return albumDAO.deleteAlbum(id);
+    }
+
+    // || ====================== Utility ====================== ||
+
+    private LocalTime getAlbumDuration(List<Song> songList) {
+        LocalTime durationSum = LocalTime.of(0, 0, 0);
+
+        for (Song song : songList) {
+            durationSum = durationSum.plusHours(song.getDuration().getHour());
+            durationSum = durationSum.plusMinutes(song.getDuration().getMinute());
+            durationSum = durationSum.plusSeconds(song.getDuration().getSecond());
+        }
+
+        return durationSum;
     }
 }
