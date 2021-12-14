@@ -2,11 +2,13 @@ package com.djontleman.album;
 
 import com.djontleman.exception.BadRequestException;
 import com.djontleman.exception.ResourceNotFoundException;
+import com.djontleman.song.Song;
 import com.djontleman.song.SongDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +51,18 @@ public class AlbumService {
         } else {
             albums = albumDAO.getAllAlbums(); // if no parameter return all albums
         }
-        albums.forEach(album -> album.setSongList(songDAO.getSongsByAlbumId(album.getId())));
+        albums.forEach(album -> {
+            List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
+            LocalTime durationSum = LocalTime.of(0, 0, 0);
+
+            for (Song song : songList) {
+                durationSum = durationSum.plusHours(song.getDuration().getHour());
+                durationSum = durationSum.plusMinutes(song.getDuration().getMinute());
+                durationSum = durationSum.plusSeconds(song.getDuration().getSecond());
+            }
+            album.setDuration(durationSum);
+            album.setSongList(songList);
+        });
         return albums;
     }
 
