@@ -36,9 +36,6 @@ public class AlbumService {
         if (album.getReleaseDate() == null) {
             throw new BadRequestException("Album release date cannot be null");
         }
-        if (album.getDuration() == null) {
-            throw new BadRequestException("Album duration cannot be null");
-        }
         return albumDAO.postAlbum(album);
     }
 
@@ -103,9 +100,7 @@ public class AlbumService {
         if (album.getReleaseDate() == null) {
             throw new BadRequestException("Album release date cannot be null");
         }
-        if (album.getDuration() == null) {
-            throw new BadRequestException("Album duration cannot be null");
-        }
+
         return albumDAO.putAlbum(id, album);
     }
 
