@@ -117,7 +117,7 @@ public class AlbumService {
 
     // || ====================== Utility ====================== ||
 
-    private LocalTime getAlbumDuration(List<Song> songList) {
+    public static LocalTime getAlbumDuration(List<Song> songList) {
         LocalTime durationSum = LocalTime.of(0, 0, 0);
 
         for (Song song : songList) {
