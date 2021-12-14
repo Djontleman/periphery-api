@@ -37,10 +37,11 @@ public class SongService {
         songs.forEach(song -> {
             List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
 
-            albumsOn.forEach(album -> {
-                List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
-                album.setDuration(getAlbumDuration(songList));
-            });
+            // logic to display duration of albums in albumsOn
+//            albumsOn.forEach(album -> {
+//                List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
+//                album.setDuration(getAlbumDuration(songList));
+//            });
 
             song.setAlbumsOn(albumsOn);
         });
@@ -56,10 +57,11 @@ public class SongService {
         Song song = songOptional.get();
         List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
 
-        albumsOn.forEach(album -> {
-            List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
-            album.setDuration(getAlbumDuration(songList));
-        });
+        // logic to display duration of albums in albumsOn
+//        albumsOn.forEach(album -> {
+//            List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
+//            album.setDuration(getAlbumDuration(songList));
+//        });
 
         song.setAlbumsOn(albumsOn);
 

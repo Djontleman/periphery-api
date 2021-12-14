@@ -13,7 +13,7 @@ public class Song {
    private LocalTime duration;
    private boolean hasMusicVideo;
    private Integer tuningId;
-   @JsonIgnoreProperties("songList")
+   @JsonIgnoreProperties({"songList", "duration"})
    private List<Album> albumsOn;
 
     public Song(int id, String name, LocalTime duration, boolean hasMusicVideo, Integer tuningId, List<Album> albumsOn) {
