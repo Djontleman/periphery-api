@@ -17,6 +17,7 @@ public interface AlbumDAO {
     public int getCountAlbumsWhereAlbumType(AlbumType albumType);
     public Optional<Album> getAlbumById(int id);
     public List<Album> getAlbumsBySongId(int id);
+    public List<Album> getAlbumsByLabelId(int id);
 
     // || ====================== Update/PUT/PATCH ====================== ||
 
