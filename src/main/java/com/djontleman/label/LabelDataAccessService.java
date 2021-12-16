@@ -55,6 +55,16 @@ public class LabelDataAccessService implements LabelDAO{
                 .findFirst();
     }
 
+    @Override
+    public List<Label> getLabelsByAlbumId(int id) {
+        String sql = """
+                SELECT * FROM labels
+                INNER JOIN albums_labels ON labels.id = albums_labels.label_id
+                WHERE album_id = ?;
+                """;
+        return jdbcTemplate.query(sql, labelRowMapper, id);
+    }
+
     // || ====================== Update/PUT/PATCH ====================== ||
 
     @Override

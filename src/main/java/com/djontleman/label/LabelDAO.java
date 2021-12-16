@@ -13,6 +13,7 @@ public interface LabelDAO {
 
     public List<Label> getAllLabels();
     public Optional<Label> getLabelById(int id);
+    public List<Label> getLabelsByAlbumId(int id);
 
     // || ====================== Update/PUT/PATCH ====================== ||
 
