@@ -1,5 +1,6 @@
 package com.djontleman.album;
 
+import com.djontleman.label.Label;
 import com.djontleman.song.Song;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -22,5 +23,6 @@ public class Album {
     private LocalTime duration;
     @JsonIgnoreProperties("albumsOn")
     private List<Song> songList;
+    private List<Label> labels;
 
 }

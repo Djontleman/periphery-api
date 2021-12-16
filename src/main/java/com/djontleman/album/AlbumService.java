@@ -2,6 +2,8 @@ package com.djontleman.album;
 
 import com.djontleman.exception.BadRequestException;
 import com.djontleman.exception.ResourceNotFoundException;
+import com.djontleman.label.Label;
+import com.djontleman.label.LabelDAO;
 import com.djontleman.song.Song;
 import com.djontleman.song.SongDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,15 @@ public class AlbumService {
 
     private AlbumDAO albumDAO;
     private SongDAO songDAO;
+    private LabelDAO labelDAO;
 
     @Autowired
-    public AlbumService(@Qualifier("postgresAlbum") AlbumDAO albumDAO, @Qualifier("postgresSong") SongDAO songDAO) {
+    public AlbumService(@Qualifier("postgresAlbum") AlbumDAO albumDAO,
+                        @Qualifier("postgresSong") SongDAO songDAO,
+                        @Qualifier("postgresLabel") LabelDAO labelDAO) {
         this.albumDAO = albumDAO;
         this.songDAO = songDAO;
+        this.labelDAO = labelDAO;
     }
 
     // || ====================== Create/POST ====================== ||
@@ -53,6 +59,9 @@ public class AlbumService {
             List<Song> songList = songDAO.getSongsByAlbumId(album.getId());
             album.setSongList(songList);
             album.setDuration(getAlbumDuration(songList));
+
+            List<Label> labels = labelDAO.getLabelsByAlbumId(album.getId());
+            album.setLabels(labels);
         });
 
         return albums;
@@ -76,6 +85,8 @@ public class AlbumService {
         List<Song> songList = songDAO.getSongsByAlbumId(id);
         album.setSongList(songList);
         album.setDuration(getAlbumDuration(songList));
+        List<Label> labels = labelDAO.getLabelsByAlbumId(album.getId());
+        album.setLabels(labels);
 
         return Optional.of(album);
     }

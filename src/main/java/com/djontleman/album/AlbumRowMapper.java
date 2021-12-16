@@ -17,6 +17,7 @@ public class AlbumRowMapper implements RowMapper {
                 AlbumType.valueOf(rs.getString("album_type").toUpperCase()),
                 rs.getDate("release_date").toLocalDate(),
                 null,
+                null,
                 null
         );
         return album;
