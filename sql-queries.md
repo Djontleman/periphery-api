@@ -157,6 +157,40 @@ DELETE FROM albums
 WHERE id = ?;
 ```
 
+## Queries: Labels
+### Create/POST
+
+Post Label:
+```roomsql
+INSERT INTO labels (label_name) VALUES (?);
+```
+
+### Read/GET
+
+Get All Labels:
+```roomsql
+SELECT * FROM labels;
+```
+
+Get Label By ID:
+```roomsql
+SELECT * FROM labels WHERE id = ?;
+```
+
+### Update/PUT
+
+Put Label:
+```roomsql
+UPDATE labels SET label_name = ? WHERE id = ?;
+```
+
+### Delete/DELETE
+
+Delete Label:
+```roomsql
+DELETE FROM labels WHERE id = ?;
+```
+
 ## Queries: Songs
 ### Create/POST
 

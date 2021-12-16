@@ -20,6 +20,8 @@ public class LabelDataAccessService implements LabelDAO{
         this.labelRowMapper = labelRowMapper;
     }
 
+    // || ====================== Create/POST ====================== ||
+
     @Override
     public int postLabel(Label label) {
         String sql = """
@@ -29,6 +31,8 @@ public class LabelDataAccessService implements LabelDAO{
                 """;
         return jdbcTemplate.update(sql, label.getName());
     }
+
+    // || ====================== Read/GET ====================== ||
 
     @Override
     public List<Label> getAllLabels() {
@@ -51,6 +55,8 @@ public class LabelDataAccessService implements LabelDAO{
                 .findFirst();
     }
 
+    // || ====================== Update/PUT/PATCH ====================== ||
+
     @Override
     public int putLabel(int id, Label label) {
         String sql = """
@@ -61,6 +67,8 @@ public class LabelDataAccessService implements LabelDAO{
         return jdbcTemplate.update(
                 sql, label.getName(), id);
     }
+
+    // || ====================== Delete/DELETE ====================== ||
 
     @Override
     public int deleteLabel(int id) {
