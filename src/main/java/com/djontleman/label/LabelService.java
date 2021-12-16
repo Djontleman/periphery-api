@@ -1,5 +1,7 @@
 package com.djontleman.label;
 
+import com.djontleman.album.Album;
+import com.djontleman.album.AlbumDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,13 @@ import java.util.Optional;
 public class LabelService {
 
     private LabelDAO labelDAO;
+    private AlbumDAO albumDAO;
 
     @Autowired
-    public LabelService(@Qualifier("postgresLabel") LabelDAO labelDAO) {
+    public LabelService(@Qualifier("postgresLabel") LabelDAO labelDAO,
+                        @Qualifier("postgresAlbum") AlbumDAO albumDAO) {
         this.labelDAO = labelDAO;
+        this.albumDAO = albumDAO;
     }
 
     // || ====================== Create/POST ====================== ||
@@ -27,11 +32,24 @@ public class LabelService {
     // || ====================== Read/GET ====================== ||
 
     public List<Label> getAllLabels() {
-        return labelDAO.getAllLabels();
+        List<Label> labels = labelDAO.getAllLabels();
+
+        labels.forEach(label -> {
+            List<Album> albumList = albumDAO.getAlbumsByLabelId(label.getId());
+            label.setAlbumList(albumList);
+        });
+
+        return labels;
     }
 
     public Optional<Label> getLabelById(int id) {
-        return labelDAO.getLabelById(id);
+        Optional<Label> labelOptional = labelDAO.getLabelById(id);
+
+        Label label = labelOptional.get();
+        List<Album> albumList = albumDAO.getAlbumsByLabelId(label.getId());
+        label.setAlbumList(albumList);
+
+        return Optional.of(label);
     }
 
     // || ====================== Update/PUT/PATCH ====================== ||

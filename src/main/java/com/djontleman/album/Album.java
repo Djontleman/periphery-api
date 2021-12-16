@@ -23,6 +23,7 @@ public class Album {
     private LocalTime duration;
     @JsonIgnoreProperties("albumsOn")
     private List<Song> songList;
+    @JsonIgnoreProperties("albumList")
     private List<Label> labels;
 
 }
