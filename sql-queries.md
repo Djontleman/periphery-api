@@ -134,6 +134,13 @@ INNER JOIN albums_songs ON albums.id = albums_songs.album_id
 WHERE albums_songs.song_id = ?;
 ```
 
+Get Albums By Label ID:
+```roomsql
+SELECT * FROM albums
+INNER JOIN albums_labels ON albums.id = albums_labels.album_id
+WHERE albums_labels.label_id = ?;
+```
+
 Get Album By Name:
 ```roomsql
 SELECT * FROM albums
@@ -175,6 +182,13 @@ SELECT * FROM labels;
 Get Label By ID:
 ```roomsql
 SELECT * FROM labels WHERE id = ?;
+```
+
+Get Labels By Album ID:
+```roomsql
+SELECT * FROM labels
+INNER JOIN albums_labels ON labels.id = albums_labels.label_id
+WHERE album_id = ?;
 ```
 
 ### Update/PUT
