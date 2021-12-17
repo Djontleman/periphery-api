@@ -2,6 +2,7 @@ package com.djontleman.song;
 
 import com.djontleman.album.Album;
 import com.djontleman.album.AlbumDAO;
+import com.djontleman.exception.BadRequestException;
 import com.djontleman.exception.ResourceNotFoundException;
 import com.djontleman.label.Label;
 import com.djontleman.label.LabelDAO;
@@ -33,6 +34,12 @@ public class SongService {
     // || ====================== Create/POST ====================== ||
 
     public int postSong(Song song) {
+        if (song.getName() == null || song.getName().length() <= 0) {
+            throw new BadRequestException("Song name cannot be empty");
+        }
+        if (song.getDuration() == null) {
+            throw new BadRequestException("Song duration cannot be null");
+        }
         return songDAO.postSong(song);
     }
 
@@ -87,6 +94,18 @@ public class SongService {
     // || ====================== Update/PUT ====================== ||
 
     public int putSong(int id, Song song) {
+        Optional<Song> songOptional = songDAO.getSongById(id);
+        if (songOptional.isEmpty()) {
+            throw new ResourceNotFoundException("No song with ID: " + id);
+        }
+
+        if (song.getName() == null || song.getName().length() <= 0) {
+            throw new BadRequestException("Song name cannot be empty");
+        }
+        if (song.getDuration() == null) {
+            throw new BadRequestException("Song duration cannot be null");
+        }
+
         return songDAO.putSong(id, song);
     }
 
