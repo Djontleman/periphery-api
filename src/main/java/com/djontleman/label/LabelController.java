@@ -1,6 +1,7 @@
 package com.djontleman.label;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class LabelController {
     // || ====================== Create/POST ====================== ||
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void postLabel(@RequestBody Label label) {
         labelService.postLabel(label);
     }
@@ -27,11 +29,13 @@ public class LabelController {
     // || ====================== Read/GET ====================== ||
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Label> getAllLabels() {
         return labelService.getAllLabels();
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Optional<Label> getLabelById(@PathVariable int id) {
         return labelService.getLabelById(id);
     }
@@ -39,6 +43,7 @@ public class LabelController {
     // || ====================== Update/PUT/PATCH ====================== ||
 
     @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void putLabel(@PathVariable int id, @RequestBody Label label) {
         labelService.putLabel(id, label);
     }
@@ -46,6 +51,7 @@ public class LabelController {
     // || ====================== Delete/DELETE ====================== ||
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLabel(@PathVariable int id) {
         labelService.deleteLabel(id);
     }
