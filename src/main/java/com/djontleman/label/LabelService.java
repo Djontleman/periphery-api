@@ -2,6 +2,8 @@ package com.djontleman.label;
 
 import com.djontleman.album.Album;
 import com.djontleman.album.AlbumDAO;
+import com.djontleman.exception.BadRequestException;
+import com.djontleman.exception.ResourceNotFoundException;
 import com.djontleman.song.Song;
 import com.djontleman.song.SongDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class LabelService {
     // || ====================== Create/POST ====================== ||
 
     public int postLabel(Label label) {
+        if (label.getName() == null || label.getName().length() <= 0) {
+            throw new BadRequestException("Label name cannot be empty");
+        }
         return labelDAO.postLabel(label);
     }
 
@@ -55,6 +60,9 @@ public class LabelService {
 
     public Optional<Label> getLabelById(int id) {
         Optional<Label> labelOptional = labelDAO.getLabelById(id);
+        if (labelOptional.isEmpty()) {
+            throw new ResourceNotFoundException("No label with ID: " + id);
+        }
 
         Label label = labelOptional.get();
 
@@ -72,12 +80,25 @@ public class LabelService {
     // || ====================== Update/PUT/PATCH ====================== ||
 
     public int putLabel(int id, Label label) {
+        Optional<Label> labelOptional = labelDAO.getLabelById(id);
+        if (labelOptional.isEmpty()) {
+            throw new ResourceNotFoundException("No label with ID: " + id);
+        }
+
+        if (label.getName() == null || label.getName().length() <= 0) {
+            throw new BadRequestException("Label name cannot be empty");
+        }
+
         return labelDAO.putLabel(id, label);
     }
 
     // || ====================== Delete/DELETE ====================== ||
 
     public int deleteLabel(int id) {
+        Optional<Label> label = labelDAO.getLabelById(id);
+        if (label.isEmpty()) {
+            throw new ResourceNotFoundException("No label with ID: " + id);
+        }
         return labelDAO.deleteLabel(id);
     }
 }
