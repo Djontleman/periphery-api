@@ -21,9 +21,10 @@ public class Album {
     private AlbumType type;
     private LocalDate releaseDate;
     private LocalTime duration;
-    @JsonIgnoreProperties("albumsOn")
-    private List<Song> songList;
     @JsonIgnoreProperties("albumList")
     private List<Label> labels;
+    @JsonIgnoreProperties("albumsOn")
+    private List<Song> songList;
+
 
 }
