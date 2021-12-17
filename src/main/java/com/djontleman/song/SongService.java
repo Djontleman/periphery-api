@@ -3,6 +3,8 @@ package com.djontleman.song;
 import com.djontleman.album.Album;
 import com.djontleman.album.AlbumDAO;
 import com.djontleman.exception.ResourceNotFoundException;
+import com.djontleman.label.Label;
+import com.djontleman.label.LabelDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,15 @@ public class SongService {
 
     private SongDAO songDAO;
     private AlbumDAO albumDAO;
+    private LabelDAO labelDAO;
 
     @Autowired
-    public SongService(@Qualifier("postgresSong") SongDAO songDAO, @Qualifier("postgresAlbum") AlbumDAO albumDAO) {
+    public SongService(@Qualifier("postgresSong") SongDAO songDAO,
+                       @Qualifier("postgresAlbum") AlbumDAO albumDAO,
+                       @Qualifier("postgresLabel") LabelDAO labelDAO) {
         this.songDAO = songDAO;
         this.albumDAO = albumDAO;
+        this.labelDAO = labelDAO;
     }
 
     // || ====================== Create/POST ====================== ||
@@ -36,6 +42,11 @@ public class SongService {
         List<Song> songs = songDAO.getAllSongs();
         songs.forEach(song -> {
             List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
+
+            albumsOn.forEach(album -> {
+                List<Label> labels = labelDAO.getLabelsByAlbumId(album.getId());
+                album.setLabels(labels);
+            });
 
             // logic to display duration of albums in albumsOn
 //            albumsOn.forEach(album -> {
@@ -55,7 +66,12 @@ public class SongService {
         }
 
         Song song = songOptional.get();
+
         List<Album> albumsOn = albumDAO.getAlbumsBySongId(song.getId());
+        albumsOn.forEach(album -> {
+            List<Label> labels = labelDAO.getLabelsByAlbumId(album.getId());
+            album.setLabels(labels);
+        });
 
         // logic to display duration of albums in albumsOn
 //        albumsOn.forEach(album -> {
