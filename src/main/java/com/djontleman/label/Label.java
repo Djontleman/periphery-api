@@ -15,7 +15,7 @@ public class Label {
 
     private int id;
     private String name;
-    @JsonIgnoreProperties("labels")
+    @JsonIgnoreProperties({"labels", "duration"})
     private List<Album> albumList;
 
 }
